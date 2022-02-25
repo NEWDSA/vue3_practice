@@ -1,17 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld :msg="lc"  />
+  <HelloWorld @showlist="show" :msg="lc"  />
   {{lc}}
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
   data() {
     return {
-      lc: '333'
+      lc: ''
+    }
+  },
+  methods: {
+    show(msg) {
+      this.lc = msg
+      console.log(msg)
     }
   },
   components: {

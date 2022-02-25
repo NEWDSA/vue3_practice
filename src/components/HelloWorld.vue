@@ -1,22 +1,29 @@
 <template>
   <div class="hello">
-    <input type="text" v-model="msg" />
+    <input @change="chage_value" type="text" v-model="msg" />
     <h3>Essential Links</h3>
   </div>
 </template>
 
 <script>
-import {h,ref,reactive} from "vue";
+import {h,ref,reactive,watchEffect} from "vue";
 export default {
   name: "HelloWorld",
   props: {
     msg: String,
   },
-  setup() {
+  setup(props,context) {
     const readerNumber=ref(0);
     const book=reactive({title:'vue 3 guide'})
-    //use render
-    return ()=>h('canvs',[readerNumber.value,book.title])
+    const lc_msg=ref(props.msg);
+    //使用 watch監聽
+    //vue3 onwatch
+    
+    watchEffect(()=>{
+      // console.log(`watchEffect ${lc_msg.value}`)
+      context.emit('showlist',props.msg)
+    })
+    
   },
 };
 </script>
